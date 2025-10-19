@@ -14,11 +14,9 @@ repositories {
     maven { url "https://maven.fabricmc.net/" }
 }
 
-
-
 dependencies {
     minecraft "com.mojang:minecraft:1.21.1"
-    mappings loom.officialMojangMappings()
+    mappings loom.officialMojangMappings() // MUST match Minecraft version
 
     modImplementation "net.fabricmc:fabric-loader:0.16.9"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.107.0+1.21.1"
@@ -26,8 +24,6 @@ dependencies {
 
     implementation "com.google.code.findbugs:jsr305:3.0.2"
 }
-
-
 
 java {
     toolchain {

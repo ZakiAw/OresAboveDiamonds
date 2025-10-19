@@ -1,36 +1,19 @@
 package oresAboveDiamonds.init;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.CreativeModeTab;
-import oresAboveDiamonds.items.*;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
+import oresAboveDiamonds.OresAboveDiamonds;
 
 public class ModItems {
-    public static final Map<String, Item> ITEMS = new LinkedHashMap<>();
 
-    // Armor materials
-    public static final ArmorMaterial AMETHYST_ARMOR = new ModArmorMaterial("amethyst", 25, new int[]{2, 5, 6, 2}, 15, 2.0F, 0.0F);
-    public static final ArmorMaterial BLACK_OPAL_ARMOR = new ModArmorMaterial("black_opal", 33, new int[]{3, 6, 8, 3}, 20, 3.0F, 0.1F);
+    public static final Item BLACK_OPAL = registerItem("black_opal",
+            new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
 
-    // Items
-    public static final Item AMETHYST_INGOT = register("amethyst_ingot", new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-    public static final Item BLACK_OPAL = register("black_opal", new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+    public static void registerAll() {}
 
-    // Armor Items (example)
-    public static final Item AMETHYST_HELMET = register("amethyst_helmet", new CustomArmorItem(AMETHYST_ARMOR, net.minecraft.world.entity.EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
-    public static final Item BLACK_OPAL_HELMET = register("black_opal_helmet", new CustomArmorItem(BLACK_OPAL_ARMOR, net.minecraft.world.entity.EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
-
-    public static void registerItems() {
-        // Already added in ITEMS map
-    }
-
-    private static Item register(String name, Item item) {
-        ITEMS.put(name, item);
-        return item;
+    private static Item registerItem(String name, Item item) {
+        return Registry.register(Registry.ITEM, new Identifier(OresAboveDiamonds.MOD_ID, name), item);
     }
 }
