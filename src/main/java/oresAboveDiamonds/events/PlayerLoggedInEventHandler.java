@@ -8,7 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import oresAboveDiamonds.config.OADConfig;
 
-public class PlayerLoginHandler {
+public class PlayerLoggedInEventHandler {
 
     // Unique ID for your packet
     public static final Identifier SYNC_CONFIG_PACKET = new Identifier("oresabovediamonds", "sync_config");

@@ -46,7 +46,7 @@ public class OADConfig extends ConfigData {
 
     // Network sync (Fabric doesn’t have built-in sync; you’ll need custom packets if desired)
     public boolean enableServerConfigSync = true;
-    public boolean sendConfigSyncPacket = true;
+    public boolean sendPacketSyncConfig = true;
 
     // Load config
     public static void register() {

@@ -7,13 +7,13 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import oresAboveDiamonds.config.OADConfig;
 
-public class ConfigSyncPacket {
+public class PacketSyncConfig {
 
     public static final Identifier SYNC_CONFIG = new Identifier("oresabovediamonds", "sync_config");
 
     private final OADConfig config;
 
-    public ConfigSyncPacket(OADConfig config) {
+    public PacketSyncConfig(OADConfig config) {
         this.config = config;
     }
 
@@ -50,6 +50,6 @@ public class ConfigSyncPacket {
 
     // Send the config to a player
     public static void send(ServerPlayerEntity player, OADConfig config) {
-        ServerPlayNetworking.send(player, SYNC_CONFIG, new ConfigSyncPacket(config).toPacketByteBuf());
+        ServerPlayNetworking.send(player, SYNC_CONFIG, new PacketSyncConfig(config).toPacketByteBuf());
     }
 }

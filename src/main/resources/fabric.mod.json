@@ -3,20 +3,17 @@
   "id": "oresabovediamonds",
   "version": "1.0.0",
   "name": "Ores Above Diamonds",
-  "description": "Adds Amethyst and Black Opal ores, armor, tools, and netherite upgrades.",
-  "authors": [ "Zaki" ],
-  "contact": {},
+  "description": "Adds ores rarer than diamonds.",
+  "authors": ["ZakiAw"],
   "license": "MIT",
   "icon": "assets/oresabovediamonds/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "oresabovediamonds.OresAboveDiamonds"
-    ]
+    "main": ["oresabovediamonds.OresAboveDiamonds"]
   },
   "depends": {
     "fabricloader": ">=0.16.0",
-    "minecraft": "~1.21.1",
-    "fabric": "*"
+    "fabric": "*",
+    "minecraft": "1.21.10"
   }
 }

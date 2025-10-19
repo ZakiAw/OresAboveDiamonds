@@ -1,29 +1,18 @@
 package oresAboveDiamonds.blocks;
 
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.ExperienceDroppingBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 
-public class BlackOpalOre extends DropExperienceBlock {
-
-	public BlackOpalOre() {
-		this(SoundType.STONE, 3f);
-	}
-	
-	public BlackOpalOre(SoundType soundType) {
-		this(soundType, 3f);
-	}
-	
-	public BlackOpalOre(SoundType soundType, float hardness) {
-		super(Properties
-				.of()
-				.mapColor(MapColor.STONE)
-				.requiresCorrectToolForDrops()
-				.strength(hardness, 3f)
-				.sound(soundType),
-				
-			 UniformInt.of(25, 75));
-	}
-
+public class BlackOpalOre extends ExperienceDroppingBlock {
+    public BlackOpalOre() {
+        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK)
+                .strength(4.0F, 4.0F)
+                .sound(SoundType.STONE)
+                .requiresCorrectToolForDrops(),
+              SimpleWeightedRandomList.<Integer>builder().add(2, 10).add(3, 5).build());
+    }
 }
