@@ -1,32 +1,37 @@
 package oresAboveDiamonds.init;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import oresAboveDiamonds.OresAboveDiamonds;
 
-@Mod.EventBusSubscriber(modid = OresAboveDiamonds.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItemGroups {
 
-	public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, OresAboveDiamonds.MODID);
+    public static final ItemGroup OAD_GROUP = Registry.register(
+        Registries.ITEM_GROUP,
+        new Identifier(OresAboveDiamonds.MODID, "tab"),
+        FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ModItems.AMETHYST))
+            .displayName(Text.translatable("itemGroup." + OresAboveDiamonds.MODID))
+            .entries((context, entries) -> {
+                // Add all your mod items here
+                entries.add(ModItems.AMETHYST);
+                entries.add(ModItems.BLACK_OPAL);
+                entries.add(ModItems.AMETHYST_SWORD);
+                entries.add(ModItems.BLACK_OPAL_SWORD);
+                entries.add(ModItems.NETHERITE_OPAL_SWORD);
+                entries.add(ModItems.AMETHYST_BLOCK);
+                entries.add(ModItems.BLACK_OPAL_BLOCK);
+                // etc.
+            })
+            .build()
+    );
 
-	public static final RegistryObject<CreativeModeTab> OAD_TAB = TABS.register("tab", () -> CreativeModeTab.builder()
-			.title(Component.translatable("itemGroup." + OresAboveDiamonds.MODID))
-			.icon(() -> new ItemStack(ModItems.AMETHYST.get()))
-			.build()
-	);
-
-	@SubscribeEvent
-	public static void buildContents(final BuildCreativeModeTabContentsEvent event) {
-		if (event.getTabKey() == OAD_TAB.getKey()) {
-			ModItems.ITEMS.getEntries().stream().map(RegistryObject::get).forEach(event::accept);
-		}
-	}
-
+    public static void registerItemGroups() {
+        // No-op in Fabric, just ensures the static initializer runs
+    }
 }

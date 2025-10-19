@@ -10,50 +10,53 @@ import oresAboveDiamonds.lists.ArmorMaterialList;
 
 public class CustomArmorItem extends ArmorItem {
 
-	public CustomArmorItem(ArmorMaterial materialIn, ArmorItem.Type type, Properties builder) {
-		super(materialIn, type, builder);
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return true;
-	}
+    public CustomArmorItem(ArmorMaterial material, Type slot, Properties properties) {
+        super(material, slot, properties);
+    }
 
-	
-	// Reference: gobber by kwpugh
-	@Override
-	public void onArmorTick(ItemStack stack, Level world, Player player) {
-		ArmorMaterial material = this.getMaterial();
-		if(material.equals(ArmorMaterialList.AMETHYST) || material.equals(ArmorMaterialList.BLACK_OPAL) || material.equals(ArmorMaterialList.NETHERITE_OPAL)) {
-			ArmorMaterialList modMaterial = (ArmorMaterialList) material;
-			if(modMaterial.isInfinite()) {
-				ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
-				ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-				ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
-				ItemStack feet = player.getItemBySlot(EquipmentSlot.FEET);	
-			
-				setDamage(head, 0);
-				setDamage(chest, 0);
-				setDamage(legs, 0);
-				setDamage(feet, 0);
-				return;
-			} 
-		}
-		super.onArmorTick(stack, world, player);
-	}
-	
-	@Override
-	public void onCraftedBy(ItemStack stack, Level worldIn, Player playerIn) {
-		ArmorMaterial material = this.getMaterial();
-		if(material.equals(ArmorMaterialList.AMETHYST) || material.equals(ArmorMaterialList.BLACK_OPAL) || material.equals(ArmorMaterialList.NETHERITE_OPAL)) {
-			ArmorMaterialList modMaterial = (ArmorMaterialList) material;
-			if(modMaterial.isInfinite()) {
-				stack.getOrCreateTag().putBoolean("Unbreakable", true);
-				return;
-			}
-		}
-		super.onCraftedBy(stack, worldIn, playerIn);
-	}
-	
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
+        ArmorMaterial material = this.getMaterial();
+        if (material.equals(ArmorMaterialList.AMETHYST) ||
+            material.equals(ArmorMaterialList.BLACK_OPAL) ||
+            material.equals(ArmorMaterialList.NETHERITE_OPAL)) {
+            
+            ArmorMaterialList modMaterial = (ArmorMaterialList) material;
+            if (modMaterial.isInfinite()) {
+                setDamage(player.getItemBySlot(EquipmentSlot.HEAD), 0);
+                setDamage(player.getItemBySlot(EquipmentSlot.CHEST), 0);
+                setDamage(player.getItemBySlot(EquipmentSlot.LEGS), 0);
+                setDamage(player.getItemBySlot(EquipmentSlot.FEET), 0);
+                return;
+            }
+        }
+        super.onArmorTick(stack, world, player);
+    }
+
+    private void setDamage(ItemStack stack, int damage) {
+        if (!stack.isEmpty()) {
+            stack.setDamageValue(damage);
+        }
+    }
+
+    @Override
+    public void onCraftedBy(ItemStack stack, Level world, Player player) {
+        ArmorMaterial material = this.getMaterial();
+        if (material.equals(ArmorMaterialList.AMETHYST) ||
+            material.equals(ArmorMaterialList.BLACK_OPAL) ||
+            material.equals(ArmorMaterialList.NETHERITE_OPAL)) {
+
+            ArmorMaterialList modMaterial = (ArmorMaterialList) material;
+            if (modMaterial.isInfinite()) {
+                stack.getOrCreateTag().putBoolean("Unbreakable", true);
+                return;
+            }
+        }
+        super.onCraftedBy(stack, world, player);
+    }
 }

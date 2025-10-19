@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_end",
-  "features": "oresabovediamonds:ore_end_black_opal_3",
-  "step": "underground_ores"
-}

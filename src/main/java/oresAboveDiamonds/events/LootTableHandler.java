@@ -1,51 +1,47 @@
 package oresAboveDiamonds.events;
 
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import com.google.common.collect.ImmutableList;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.item.Item;
+import net.minecraft.loot.*;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.util.Identifier;
+import oresAboveDiamonds.config.OADConfig;
 
 public class LootTableHandler {
 
-	// Code here referenced from Vazkii's mod Botania
+    public static void register() {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (!id.getNamespace().equals("minecraft")) return;
 
-	@SubscribeEvent
-	public static void lootLoad(LootTableLoadEvent event) {
-		String prefix = "minecraft:chests/";
-		String name = event.getName().toString();
-		/*
-		if (name.startsWith(prefix) && OADConfig.chest_loot.get() == true) {
+            String path = id.getPath();
+            if (!path.startsWith("chests/")) return;
 
-			String file = name.substring(name.indexOf(prefix) + prefix.length());
-			switch (file) {
-			case "abandoned_mineshaft":
-			case "bastion_treasure":
-			case "jungle_temple":
-			case "buried_treasure":
-			case "desert_pyramid":
-			case "end_city_treasure":
-			case "nether_bridge":
-			case "shipwreck_treasure":
-			case "village_toolsmith":
-			case "village_weaponsmith":
-				event.getTable().addPool(getInjectPool(file));
-				break;
-			default:
-				break;
-			}
+            if (!OADConfig.get().chestLoot) return;
 
-		}
-		*/
-	}
-
-	/*
-	public static LootPool getInjectPool(String entryName) {
-		return LootPool.lootPool().add(getInjectEntry(entryName, 1)).name("oresabovediamonds_inject").build();
-	}
-
-
-	private static LootPoolEntryContainer.Builder<?> getInjectEntry(String name, int weight) {
-		ResourceLocation table = new ResourceLocation("oresabovediamonds", "inject/" + name);
-		return LootItem.lootTableItem(new Item(null));
-	}
-	*/
-
+            switch (path.substring("chests/".length())) {
+                case "abandoned_mineshaft":
+                case "bastion_treasure":
+                case "jungle_temple":
+                case "buried_treasure":
+                case "desert_pyramid":
+                case "end_city_treasure":
+                case "nether_bridge":
+                case "shipwreck_treasure":
+                case "village_toolsmith":
+                case "village_weaponsmith":
+                    tableBuilder.pool(LootPool.builder()
+                            .with(ItemEntry.builder(Item.byRawId( /* your ore item ID */ ))
+                                    .weight(1)
+                                    .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1))))
+                            .name("oresabovediamonds_inject")
+                    );
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
 }

@@ -1,73 +1,129 @@
 package oresAboveDiamonds.init;
 
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import oresAboveDiamonds.OresAboveDiamonds;
-import oresAboveDiamonds.config.OADConfig;
-import oresAboveDiamonds.items.*;
-import oresAboveDiamonds.lists.ArmorMaterialList;
-import oresAboveDiamonds.lists.ToolMaterialList;
 
+/**
+ * Fabric version of the item registry for OresAboveDiamonds
+ */
 public class ModItems {
 
-	//Thanks to Cadiboo for the tutorial
-	public static int axedmg = OADConfig.old_combat_mechanics.get() ? 2 : 5;
-	public static int shoveldmg = OADConfig.old_combat_mechanics.get() ? 0 : 2;
-	public static int pickdmg = OADConfig.old_combat_mechanics.get() ? 1 : 1;
+    // ====== Basic Items ======
+    public static final Item BLACK_OPAL = register("black_opal",
+            new Item(new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST = register("amethyst",
+            new Item(new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OresAboveDiamonds.MODID);
+    // ====== Tool Materials ======
+    public static final ToolMaterial AMETHYST_MATERIAL = ToolMaterials.DIAMOND;
+    public static final ToolMaterial BLACK_OPAL_MATERIAL = ToolMaterials.NETHERITE;
+    public static final ToolMaterial NETHERITE_OPAL_MATERIAL = ToolMaterials.NETHERITE;
 
-	public static final RegistryObject<Item> BLACK_OPAL = ITEMS.register("black_opal", () -> new Item(new Item.Properties()));
-	public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties()));
+    // ====== Amethyst Tools ======
+    public static final Item AMETHYST_SWORD = register("amethyst_sword",
+            new SwordItem(AMETHYST_MATERIAL, 3, -2.4F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_PICKAXE = register("amethyst_pickaxe",
+            new PickaxeItem(AMETHYST_MATERIAL, 1, -2.8F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_SHOVEL = register("amethyst_shovel",
+            new ShovelItem(AMETHYST_MATERIAL, 1.5F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_AXE = register("amethyst_axe",
+            new AxeItem(AMETHYST_MATERIAL, 5.0F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_HOE = register("amethyst_hoe",
+            new HoeItem(AMETHYST_MATERIAL, -4, 1.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<CustomSwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new CustomSwordItem(ToolMaterialList.AMETHYST, 3, -2.4f, new Item.Properties()));
-	public static final RegistryObject<CustomPickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new CustomPickaxeItem(ToolMaterialList.AMETHYST, pickdmg, -2.8f, new Item.Properties()));
-	public static final RegistryObject<CustomShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new CustomShovelItem(ToolMaterialList.AMETHYST, shoveldmg, -3f, new Item.Properties()));
-	public static final RegistryObject<CustomAxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new CustomAxeItem(ToolMaterialList.AMETHYST, axedmg, -3f, new Item.Properties()));
-	public static final RegistryObject<CustomHoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new CustomHoeItem(ToolMaterialList.AMETHYST, -4, 1f, new Item.Properties()));
+    // ====== Black Opal Tools ======
+    public static final Item BLACK_OPAL_SWORD = register("black_opal_sword",
+            new SwordItem(BLACK_OPAL_MATERIAL, 3, -2.4F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_PICKAXE = register("black_opal_pickaxe",
+            new PickaxeItem(BLACK_OPAL_MATERIAL, 1, -2.8F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_SHOVEL = register("black_opal_shovel",
+            new ShovelItem(BLACK_OPAL_MATERIAL, 1.5F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_AXE = register("black_opal_axe",
+            new AxeItem(BLACK_OPAL_MATERIAL, 5.0F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_HOE = register("black_opal_hoe",
+            new HoeItem(BLACK_OPAL_MATERIAL, -5, 2.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<CustomSwordItem> BLACK_OPAL_SWORD = ITEMS.register("black_opal_sword", () -> new CustomSwordItem(ToolMaterialList.BLACK_OPAL, 3, -2.4f, new Item.Properties()));
-	public static final RegistryObject<CustomPickaxeItem> BLACK_OPAL_PICKAXE = ITEMS.register("black_opal_pickaxe", () -> new CustomPickaxeItem(ToolMaterialList.BLACK_OPAL, pickdmg, -2.8f, new Item.Properties()));
-	public static final RegistryObject<CustomShovelItem> BLACK_OPAL_SHOVEL = ITEMS.register("black_opal_shovel", () -> new CustomShovelItem(ToolMaterialList.BLACK_OPAL, shoveldmg, -3f, new Item.Properties()));
-	public static final RegistryObject<CustomAxeItem> BLACK_OPAL_AXE = ITEMS.register("black_opal_axe", () -> new CustomAxeItem(ToolMaterialList.BLACK_OPAL, axedmg, -3f, new Item.Properties()));
-	public static final RegistryObject<CustomHoeItem> BLACK_OPAL_HOE = ITEMS.register("black_opal_hoe", () -> new CustomHoeItem(ToolMaterialList.BLACK_OPAL, -5, 2f, new Item.Properties()));
+    // ====== Netherite Opal Tools ======
+    public static final Item NETHERITE_OPAL_SWORD = register("netherite_opal_sword",
+            new SwordItem(NETHERITE_OPAL_MATERIAL, 3, -2.4F, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_PICKAXE = register("netherite_opal_pickaxe",
+            new PickaxeItem(NETHERITE_OPAL_MATERIAL, 1, -2.8F, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_SHOVEL = register("netherite_opal_shovel",
+            new ShovelItem(NETHERITE_OPAL_MATERIAL, 1.5F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_AXE = register("netherite_opal_axe",
+            new AxeItem(NETHERITE_OPAL_MATERIAL, 5.0F, -3.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_HOE = register("netherite_opal_hoe",
+            new HoeItem(NETHERITE_OPAL_MATERIAL, -6, 2.0F, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
 
-	public static final RegistryObject<CustomSwordItem> NETHERITE_OPAL_SWORD = ITEMS.register("netherite_opal_sword", () -> new CustomSwordItem(ToolMaterialList.NETHERITE_OPAL, 3, -2.4f, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomPickaxeItem> NETHERITE_OPAL_PICKAXE = ITEMS.register("netherite_opal_pickaxe", () -> new CustomPickaxeItem(ToolMaterialList.NETHERITE_OPAL, pickdmg, -2.8f, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomShovelItem> NETHERITE_OPAL_SHOVEL = ITEMS.register("netherite_opal_shovel", () -> new CustomShovelItem(ToolMaterialList.NETHERITE_OPAL, shoveldmg, -3f, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomAxeItem> NETHERITE_OPAL_AXE = ITEMS.register("netherite_opal_axe", () -> new CustomAxeItem(ToolMaterialList.NETHERITE_OPAL, axedmg, -3f, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomHoeItem> NETHERITE_OPAL_HOE = ITEMS.register("netherite_opal_hoe", () -> new CustomHoeItem(ToolMaterialList.NETHERITE_OPAL, -6, 2f, new Item.Properties().fireResistant()));
+    // ====== Armor Materials ======
+    public static final ArmorMaterial AMETHYST_ARMOR = new ModArmorMaterial("amethyst", 25, new int[]{2, 5, 6, 2}, 15, 2.0F, 0.0F);
+    public static final ArmorMaterial BLACK_OPAL_ARMOR = new ModArmorMaterial("black_opal", 33, new int[]{3, 6, 8, 3}, 20, 3.0F, 0.1F);
+    public static final ArmorMaterial NETHERITE_OPAL_ARMOR = new ModArmorMaterial("netherite_opal", 40, new int[]{3, 6, 8, 3}, 25, 3.0F, 0.2F);
 
-	public static final RegistryObject<CustomArmorItem> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new CustomArmorItem(ArmorMaterialList.AMETHYST, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new CustomArmorItem(ArmorMaterialList.AMETHYST, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new CustomArmorItem(ArmorMaterialList.AMETHYST, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new CustomArmorItem(ArmorMaterialList.AMETHYST, ArmorItem.Type.BOOTS, new Item.Properties()));
+    // ====== Amethyst Armor ======
+    public static final Item AMETHYST_HELMET = register("amethyst_helmet",
+            new ArmorItem(AMETHYST_ARMOR, ArmorItem.Type.HELMET, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_CHESTPLATE = register("amethyst_chestplate",
+            new ArmorItem(AMETHYST_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_LEGGINGS = register("amethyst_leggings",
+            new ArmorItem(AMETHYST_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item AMETHYST_BOOTS = register("amethyst_boots",
+            new ArmorItem(AMETHYST_ARMOR, ArmorItem.Type.BOOTS, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<CustomArmorItem> BLACK_OPAL_HELMET = ITEMS.register("black_opal_helmet", () -> new CustomArmorItem(ArmorMaterialList.BLACK_OPAL, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> BLACK_OPAL_CHESTPLATE = ITEMS.register("black_opal_chestplate", () -> new CustomArmorItem(ArmorMaterialList.BLACK_OPAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> BLACK_OPAL_LEGGINGS = ITEMS.register("black_opal_leggings", () -> new CustomArmorItem(ArmorMaterialList.BLACK_OPAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final RegistryObject<CustomArmorItem> BLACK_OPAL_BOOTS = ITEMS.register("black_opal_boots", () -> new CustomArmorItem(ArmorMaterialList.BLACK_OPAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    // ====== Black Opal Armor ======
+    public static final Item BLACK_OPAL_HELMET = register("black_opal_helmet",
+            new ArmorItem(BLACK_OPAL_ARMOR, ArmorItem.Type.HELMET, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_CHESTPLATE = register("black_opal_chestplate",
+            new ArmorItem(BLACK_OPAL_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_LEGGINGS = register("black_opal_leggings",
+            new ArmorItem(BLACK_OPAL_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_BOOTS = register("black_opal_boots",
+            new ArmorItem(BLACK_OPAL_ARMOR, ArmorItem.Type.BOOTS, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<CustomArmorItem> NETHERITE_OPAL_HELMET = ITEMS.register("netherite_opal_helmet", () -> new CustomArmorItem(ArmorMaterialList.NETHERITE_OPAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomArmorItem> NETHERITE_OPAL_CHESTPLATE = ITEMS.register("netherite_opal_chestplate", () -> new CustomArmorItem(ArmorMaterialList.NETHERITE_OPAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomArmorItem> NETHERITE_OPAL_LEGGINGS = ITEMS.register("netherite_opal_leggings", () -> new CustomArmorItem(ArmorMaterialList.NETHERITE_OPAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
-	public static final RegistryObject<CustomArmorItem> NETHERITE_OPAL_BOOTS = ITEMS.register("netherite_opal_boots", () -> new CustomArmorItem(ArmorMaterialList.NETHERITE_OPAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
+    // ====== Netherite Opal Armor ======
+    public static final Item NETHERITE_OPAL_HELMET = register("netherite_opal_helmet",
+            new ArmorItem(NETHERITE_OPAL_ARMOR, ArmorItem.Type.HELMET, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_CHESTPLATE = register("netherite_opal_chestplate",
+            new ArmorItem(NETHERITE_OPAL_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_LEGGINGS = register("netherite_opal_leggings",
+            new ArmorItem(NETHERITE_OPAL_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
+    public static final Item NETHERITE_OPAL_BOOTS = register("netherite_opal_boots",
+            new ArmorItem(NETHERITE_OPAL_ARMOR, ArmorItem.Type.BOOTS, new Item.Settings().group(ModItemGroups.OAD_GROUP).fireproof()));
 
-	public static final RegistryObject<TooltipBlockItem> AMETHYST_ORE = ITEMS.register("amethyst_ore", () -> new TooltipBlockItem(ModBlocks.AMETHYST_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> DEEPSLATE_AMETHYST_ORE = ITEMS.register("deepslate_amethyst_ore", () -> new TooltipBlockItem(ModBlocks.DEEPSLATE_AMETHYST_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> NETHER_AMETHYST_ORE = ITEMS.register("nether_amethyst_ore", () -> new TooltipBlockItem(ModBlocks.NETHER_AMETHYST_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> END_AMETHYST_ORE = ITEMS.register("end_amethyst_ore", () -> new TooltipBlockItem(ModBlocks.END_AMETHYST_ORE.get(), new Item.Properties()));
+    // ====== Blocks as Items ======
+    public static final Item AMETHYST_BLOCK = register("amethyst_block",
+            new BlockItem(ModBlocks.AMETHYST_BLOCK, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item BLACK_OPAL_BLOCK = register("black_opal_block",
+            new BlockItem(ModBlocks.BLACK_OPAL_BLOCK, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<TooltipBlockItem> BLACK_OPAL_ORE = ITEMS.register("black_opal_ore", () -> new TooltipBlockItem(ModBlocks.BLACK_OPAL_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> DEEPSLATE_BLACK_OPAL_ORE = ITEMS.register("deepslate_black_opal_ore", () -> new TooltipBlockItem(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> NETHER_BLACK_OPAL_ORE = ITEMS.register("nether_black_opal_ore", () -> new TooltipBlockItem(ModBlocks.NETHER_BLACK_OPAL_ORE.get(), new Item.Properties()));
-	public static final RegistryObject<TooltipBlockItem> END_BLACK_OPAL_ORE = ITEMS.register("end_black_opal_ore", () -> new TooltipBlockItem(ModBlocks.END_BLACK_OPAL_ORE.get(), new Item.Properties()));
+    // ====== Ore Variants ======
+    public static final Item AMETHYST_ORE = register("amethyst_ore",
+            new BlockItem(ModBlocks.AMETHYST_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item DEEPSLATE_AMETHYST_ORE = register("deepslate_amethyst_ore",
+            new BlockItem(ModBlocks.DEEPSLATE_AMETHYST_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item NETHER_AMETHYST_ORE = register("nether_amethyst_ore",
+            new BlockItem(ModBlocks.NETHER_AMETHYST_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item END_AMETHYST_ORE = register("end_amethyst_ore",
+            new BlockItem(ModBlocks.END_AMETHYST_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
-	public static final RegistryObject<BlockItem> AMETHYST_BLOCK = ITEMS.register("amethyst_block", () -> new BlockItem(ModBlocks.AMETHYST_BLOCK.get(), new Item.Properties()));
-	public static final RegistryObject<BlockItem> BLACK_OPAL_BLOCK = ITEMS.register("black_opal_block", () -> new BlockItem(ModBlocks.BLACK_OPAL_BLOCK.get(), new Item.Properties()));
+    public static final Item BLACK_OPAL_ORE = register("black_opal_ore",
+            new BlockItem(ModBlocks.BLACK_OPAL_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item DEEPSLATE_BLACK_OPAL_ORE = register("deepslate_black_opal_ore",
+            new BlockItem(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item NETHER_BLACK_OPAL_ORE = register("nether_black_opal_ore",
+            new BlockItem(ModBlocks.NETHER_BLACK_OPAL_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
+    public static final Item END_BLACK_OPAL_ORE = register("end_black_opal_ore",
+            new BlockItem(ModBlocks.END_BLACK_OPAL_ORE, new Item.Settings().group(ModItemGroups.OAD_GROUP)));
 
+    // ====== Helper ======
+    private static <T extends Item> T register(String name, T item) {
+        return Registry.register(Registries.ITEM, new Identifier(OresAboveDiamonds.MODID, name), item);
+    }
+
+    public static void registerItems() {
+        System.out.println("[OresAboveDiamonds] Items registered!");
+    }
 }

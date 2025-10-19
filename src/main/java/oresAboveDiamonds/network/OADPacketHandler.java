@@ -1,21 +1,18 @@
 package oresAboveDiamonds.network;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
+import oresAboveDiamonds.config.OADConfig;
 
-public class OADPacketHandler  {
-	
-	private static final String PROTOCOL_VERSION = "1";
-	public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-	    new ResourceLocation("oresabovediamonds", "main"),
-	    () -> PROTOCOL_VERSION,
-	    PROTOCOL_VERSION::equals,
-	    PROTOCOL_VERSION::equals
-	);
-	
-    public static void registerMessages() {
-    	int id = 0;  	
-    	INSTANCE.registerMessage(id++, PacketSyncConfig.class, PacketSyncConfig::encode, PacketSyncConfig::decode, PacketSyncConfig::handle);
+public class OADNetwork {
+
+    public static final Identifier SYNC_CONFIG = new Identifier("oresabovediamonds", "sync_config");
+
+    // Send the config to a player
+    public static void sendConfig(ServerPlayerEntity player) {
+        // Serialize the config to a simple packet
+        ConfigSyncPacket packet = new ConfigSyncPacket(OADConfig.get());
+        ServerPlayNetworking.send(player, SYNC_CONFIG, packet.toPacketByteBuf());
     }
 }
